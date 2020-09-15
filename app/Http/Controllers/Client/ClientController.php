@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAddVenuesRequest;
+use App\Http\Requests\CreateMenuItemsRequest;
+use App\Http\Requests\CreateMenuPriceRequest;
 use App\Http\Requests\CreateProfileRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Models\UserAccount;
@@ -22,6 +24,21 @@ class ClientController extends Controller
         $users = User::all()->where('parent_id', $id);
         return view('Client.dashboard.users', ['users' => $users]);
     }
+    public function storemenuitemsprice(CreateMenuPriceRequest $request)
+    {
+        $menuItemsRate = [
+            'label' => $request->menu_rates_label,
+            'user_account_id' => Auth::user()->user_account_id,
+            'user_id' => Auth::user()->id,
+            'menu_item_id' => $request->menu_item_type_id,
+            'menu_quantity_type' => $request->menu_item_quantity_type,
+            'quantity' => $request->menu_item_quantity,
+            'price' => $request->menu_items_price
+        ];
+        // dd($menuItemsRate);
+        Auth::user()->userAccount->findOrFail(Auth::user()->user_account_id)->menuItemsRate()->create($menuItemsRate);
+        return redirect()->back();
+    }
     public function adduser()
     {
         return view('Client.dashboard.adduser');
@@ -30,6 +47,43 @@ class ClientController extends Controller
     {
 
         return view('Client.dashboard.addvenues');
+    }
+    public function menuitems()
+    {
+        $menus = Auth::user()->userAccount->findOrFail(Auth::user()->user_account_id)->menuItems()->get();
+        return view('client.dashboard.menuitems', ['menus' => $menus]);
+    }
+    public function addmenuitems()
+    {
+        return view('client.dashboard.addmenuitems');
+    }
+    public function menupackage()
+    {
+        $menuPackage = Auth::user()->userAccount->findOrFail(Auth::user()->user_account_id)->menuPackageRate()->get();
+        return view('client.dashboard.menupackage', ['menuPackage' => $menuPackage]);
+    }
+    public function addmenupackage()
+    {
+        $menus = Auth::user()->userAccount->findOrFail(Auth::user()->user_account_id)->menuItems()->get();
+        return view('client.dashboard.addmenupackage', ['menus' => $menus]);
+    }
+    public function storemenupackage(Request $request)
+    {
+        $menu_packages_rate = [
+            'user_account_id' => Auth::user()->user_account_id,
+            'user_id' => Auth::user()->id,
+            'price' => $request->menu_items_package_price,
+            'descrtiption' => $request->menu_package_description,
+        ];
+        $stored_menu_packages_rate = Auth::user()->userAccount->findOrFail(Auth::user()->user_account_id)->menuPackageRate()->create($menu_packages_rate);
+        $menu_package_rate_bridge = [
+            'menu_item_id' => $request->menu_item_id,
+            'user_menu_packages_with_rate_id' => $stored_menu_packages_rate->id,
+            'menu_quantity_type_id' => $request->menu_item_package_quantity_type,
+            'quantity' => $request->menu_package_item_quantity,
+        ];
+        Auth::user()->userAccount->findOrFail(Auth::user()->user_account_id)->menuPackageRateBridge()->create($menu_package_rate_bridge);
+        return ('saved');
     }
     public function venues()
     {
@@ -41,6 +95,28 @@ class ClientController extends Controller
     {
         $data = Auth::user()->userAccount->findOrFail(Auth::user()->user_account_id);
         return view('client.dashboard.editprofile', ['user_account' => $data]);
+    }
+    public function storemenuitems(CreateMenuItemsRequest $request)
+    {
+        $menu_items = [
+            'user_account_id' => Auth::user()->user_account_id,
+            'menu_type_id' => $request->menu_item_type_id,
+            'name' => $request->menu_item_name,
+            'status' => $request->menu_item_status,
+        ];
+        $added_menu_item = Auth::user()->userAccount->findOrFail(Auth::user()->user_account_id)->menuItems()->create($menu_items);
+        $menuItemsRate = [
+            'label' => $request->menu_rates_label,
+            'user_account_id' => Auth::user()->user_account_id,
+            'user_id' => Auth::user()->id,
+            'menu_item_id' => $added_menu_item->id,
+            'menu_quantity_type' => $request->menu_item_quantity_type,
+            'quantity' => $request->menu_item_quantity,
+            'price' => $request->menu_items_price
+        ];
+        // dd($menuItemsRate);
+        Auth::user()->userAccount->findOrFail(Auth::user()->user_account_id)->menuItemsRate()->create($menuItemsRate);
+        return redirect()->back;
     }
     public function storeprofile(CreateProfileRequest $request)
     {

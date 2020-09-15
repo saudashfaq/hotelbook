@@ -23,6 +23,13 @@ Route::group([
     Route::get('/dashboard/adduser', 'Client\ClientController@adduser')->name('client.dashboard.adduser')->middleware('auth');
     Route::get('/dashboard/addvenues', 'Client\ClientController@addvenues')->name('client.dashboard.addvenues')->middleware('auth');
     Route::get('/dashboard/editprofile', 'Client\ClientController@editprofile')->name('client.dashboard.editprofile')->middleware('auth');
+    Route::get('/dashboard/menuitems', 'Client\ClientController@menuitems')->name('client.dashboard.menuitems')->middleware('auth');
+    Route::get('/dashboard/menupackage', 'Client\ClientController@menupackage')->name('client.dashboard.menupackage')->middleware('auth');
+    Route::get('/dashboard/addmenupackage', 'Client\ClientController@addmenupackage')->name('client.dashboard.addmenupackage')->middleware('auth');
+    Route::get('/dashboard/addmenuitemsprice', 'Client\ClientController@addmenuitemsprice')->name('client.dashboard.addmenuitemsprice')->middleware('auth');
+    Route::get('/dashboard/addmenuitems', 'Client\ClientController@addmenuitems')->name('client.dashboard.addmenuitems')->middleware('auth');
+    Route::post('/dashboard/addmenupackage/store', 'Client\ClientController@storemenupackage')->name('client.dashboard.addmenupackage.store')->middleware('auth');
+    Route::post('/dashboard/addmenuitems/store', 'Client\ClientController@storemenuitems')->name('client.dashboard.addmenuitems.store')->middleware('auth');
     Route::post('/dashboard/addvenues/store', 'Client\ClientController@storevenues')->name('client.dashboard.addvenue.store')->middleware('auth');
     Route::post('/dashboard/editprofile/store', 'Client\ClientController@storeprofile')->name('client.dashboard.editprofile.store')->middleware('auth');
     Route::post('/dashboard/adduser/store', 'Client\ClientController@store')->name('client.dashboard.adduser.store')->middleware('auth');

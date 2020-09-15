@@ -20,6 +20,22 @@ class UserAccount extends Model
     }
     public function venues()
     {
-        return $this->hasMany('App\Venues');
+        return $this->hasMany('App\Models\Venues');
+    }
+    public function menuItems()
+    {
+        return $this->hasMany('App\Models\MenuItems');
+    }
+    public function menuPackageRate()
+    {
+        return $this->hasMany('App\Models\MenuPackageRate');
+    }
+    public function menuItemsRate()
+    {
+        return $this->hasOne('App\Models\MenuItemsRate');
+    }
+    public function menuPackageRateBridge()
+    {
+        return $this->belongsTo('App\Models\MenuPackageBridge');
     }
 }

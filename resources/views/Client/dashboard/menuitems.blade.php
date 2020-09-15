@@ -140,12 +140,14 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Add User</h1>
+                            <h1 class="m-0 text-dark">Menu Items</h1>
+                            <a href="{{route('client.dashboard.addmenuitems')}}" class="btn btn-primary mt-3">Add Menu</a>
+
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Starter Page</li>
+                                <li class="breadcrumb-item active">Users</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -156,31 +158,44 @@
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <div class="card register-card-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List of All Menu Items That you have created</h3>
+                        </div>
                         <!-- /.card-header -->
-                        <!-- form start -->
-                        <form role="form" action="{{route('client.dashboard.adduser.store')}}" method="post">
-                            @csrf
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">User Name</label>
-                                    <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="Enter Name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email Address</label>
-                                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Enter email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
+                        <div class="card-body p-0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Item Name</th>
+                                        <th>Item Type</th>
+                                        <th style="width: 20%">Action</th>
+                                    </tr>
+                                </thead>
 
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
+                                <tbody>
+                                    @foreach($menus as $key=>$menu)
+                                    <tr>
+                                        <td></td>
+                                        <td>{{$menu['name']}}</td>
+                                        @foreach(config('menu_type') as $key=>$my)
+                                        @if($my['id']==$menu['menu_type_id'])
+                                        <td>{{$my['name']}}</td>
+                                        @endif
+                                        @endforeach
+                                        <td>
+                                            <a href="http://" class="btn btn-sm btn-success">Update</a>
+                                            <a href="http://" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->

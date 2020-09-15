@@ -84,19 +84,45 @@
                                 </li>
                             </ul>
                         </li> -->
+                        @if(!Auth::user()->parent_id)
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('client.dashboard.users')}}" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
                                     User
                                 </p>
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item">
-                            <a href="{{route('client.dashboard.venues')}}" class="nav-link active">
+                            <a href="{{route('client.dashboard.venues')}}" class="nav-link">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p>
                                     Veneu
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('client.dashboard.menuitems')}}" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Menu
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('client.dashboard.menupackage')}}" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Menu Packages
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('client.dashboard.editprofile')}}" class="nav-link">
+                                <i class="nav-icon fas fa-cog"></i>
+                                <p>
+                                    Profile
                                 </p>
                             </a>
                         </li>

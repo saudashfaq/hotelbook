@@ -140,7 +140,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Add User</h1>
+                            <h1 class="m-0 text-dark">Add Menue Package</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -156,32 +156,67 @@
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <div class="card register-card-body">
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form role="form" action="{{route('client.dashboard.adduser.store')}}" method="post">
-                            @csrf
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">User Name</label>
-                                    <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="Enter Name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email Address</label>
-                                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Enter email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
+                    <div class="card">
+                        <div class="card-body register-card-body">
 
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+                            <form action="{{route('client.dashboard.addmenupackage.store')}}" method="post">
+                                @csrf
+                                <label for="">Menu Package Discription</label>
+                                <div class="input-group mb-3">
+                                    <textarea class="form-control" required name="menu_package_description"></textarea>
+                                </div>
+                                <label for="">Menu Item</label>
+                                <div class="input-group mb-3">
+                                    <select name='menu_item_id' class="form-control required ">
+                                        @foreach($menus as $key=>$menuType)
+                                        <option value={{$menuType['id']}}>{{$menuType['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <label for="">Menu Item Package Quantity</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" min='0' class="form-control" required name="menu_package_item_quantity" placeholder="Menu Item Quantity">
+                                    <span class="input-group-append">
+                                        <!-- <div class="input-group-text"> -->
+                                        <select name='menu_item_package_quantity_type'>
+                                            <option value="" selected hidden>Quantity Unit</option>
+                                            @foreach(config('menu_quantity_type') as $key=>$MenuQuantityType)
+                                            <option value="{{$MenuQuantityType['id']}}">{{$MenuQuantityType['name']}}</option>
+                                            @endforeach
+                                        </select>
+                                        <!-- </div> -->
+                                    </span>
+                                </div>
+                                <label for="">Menu Package Price</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" required name="menu_items_package_price" placeholder="Menu Items Price">
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
+
+                            <!-- <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="#" class="btn btn-block btn-primary">
+                    <i class="fab fa-facebook mr-2"></i>
+                    Sign up using Facebook
+                </a>
+                <a href="#" class="btn btn-block btn-danger">
+                    <i class="fab fa-google-plus mr-2"></i>
+                    Sign up using Google+
+                </a>
+            </div> -->
+
+                        </div>
+                        <!-- /.form-box -->
+                    </div><!-- /.card -->
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>

@@ -140,7 +140,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Add User</h1>
+                            <h1 class="m-0 text-dark">Add Menues</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -156,32 +156,78 @@
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <div class="card register-card-body">
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form role="form" action="{{route('client.dashboard.adduser.store')}}" method="post">
-                            @csrf
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">User Name</label>
-                                    <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="Enter Name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email Address</label>
-                                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Enter email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
+                    <div class="card">
+                        <div class="card-body register-card-body">
 
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+                            <form action="{{route('client.dashboard.addmenuitems.store')}}" method="post">
+                                @csrf
+                                <label for="">Label</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" required name="menu_rates_label" placeholder="Label">
+                                </div>
+                                <label for="">Menu Item Name</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" required name="menu_item_name" placeholder="Menu name">
+                                </div>
+                                <label for="">Menu Item Type</label>
+                                <div class="input-group mb-3">
+                                    <select name='menu_item_type_id' class="form-control required ">
+                                        @foreach(config('menu_type') as $key=>$menuType)
+                                        <option value={{$menuType['id']}}>{{$menuType['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <label for="">Menu Item Quantity</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" min='0' class="form-control" required name="menu_item_quantity" placeholder="Menu Item Quantity">
+                                    <span class="input-group-append">
+                                        <!-- <div class="input-group-text"> -->
+                                        <select name='menu_item_quantity_type'>
+                                            <option value="" selected hidden>Quantity Unit</option>
+                                            @foreach(config('menu_quantity_type') as $key=>$MenuQuantityType)
+                                            <option value="{{$MenuQuantityType['id']}}">{{$MenuQuantityType['name']}}</option>
+                                            @endforeach
+                                        </select>
+                                        <!-- </div> -->
+                                    </span>
+                                </div>
+                                <label for="">Status</label>
+                                <div class="input-group mb-3">
+                                    <select name='menu_item_status' class="form-control required ">
+                                        <option value="0">Out of Stock</option>
+                                        <option value="1">In Stock</option>
+                                    </select>
+                                </div>
+                                <label for="">Price</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" required name="menu_items_price" placeholder="Menu Items Price">
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
+
+                            <!-- <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="#" class="btn btn-block btn-primary">
+                    <i class="fab fa-facebook mr-2"></i>
+                    Sign up using Facebook
+                </a>
+                <a href="#" class="btn btn-block btn-danger">
+                    <i class="fab fa-google-plus mr-2"></i>
+                    Sign up using Google+
+                </a>
+            </div> -->
+
+                        </div>
+                        <!-- /.form-box -->
+                    </div><!-- /.card -->
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
