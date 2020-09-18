@@ -180,6 +180,7 @@
                                     <input type="Text" class="form-control" required name="max_guests" placeholder="Maximum Guests">
 
                                 </div>
+                                <label for="">Select Time</label>
                                 <div class="input-group mb-3">
                                     @foreach(config('times') as $key=>$times)
                                     <div class="icheck-primary d-inline mr-3">
@@ -190,6 +191,7 @@
                                     </div>
                                     @endforeach
                                 </div>
+                                <label for="">Select Day</label>
                                 <div class="input-group mb-3">
                                     @foreach(config('days') as $key => $days)
                                     <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success mr-3">
@@ -254,13 +256,5 @@
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        <footer class="main-footer">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                Anything you want
-            </div>
-            <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-        </footer>
     </div>
     @endsection

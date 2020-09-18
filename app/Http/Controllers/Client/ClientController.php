@@ -114,7 +114,7 @@ class ClientController extends Controller
             'quantity' => $request->menu_item_quantity,
             'price' => $request->menu_items_price
         ];
-        // dd($menuItemsRate);
+
         Auth::user()->userAccount->findOrFail(Auth::user()->user_account_id)->menuItemsRate()->create($menuItemsRate);
         return redirect()->back;
     }

@@ -169,6 +169,9 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>Name</th>
+                                        <th>Venu Type</th>
+                                        <th>Meximum Guests</th>
+                                        <th>Menimum Guests</th>
                                         <th style="width: 30%">Action</th>
                                     </tr>
                                 </thead>
@@ -178,6 +181,20 @@
                                     <tr>
                                         <td>{{$key+1}}</td>
                                         <td>{{$venue->venue_name}}</td>
+                                        <td>
+                                            @foreach(config('venues') as $key=>$venueType)
+                                            @if($venue->venue_type_id===$key)
+                                            {{$venueType}}
+                                            @endif
+                                            @endforeach
+
+                                        </td>
+                                        <td>
+                                            {{$venue->min_guests}}
+                                        </td>
+                                        <td>
+                                            {{$venue->max_guests}}
+                                        </td>
                                         <td>
                                             <a href="http://" class="btn btn-sm btn-success">Update</a>
                                             <a href="http://" class="btn btn-sm btn-danger">Delete</a>
@@ -209,13 +226,5 @@
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        <footer class="main-footer">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                Anything you want
-            </div>
-            <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-        </footer>
     </div>
     @endsection
